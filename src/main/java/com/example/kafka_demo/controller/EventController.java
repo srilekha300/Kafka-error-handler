@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/producer-app")
+
 public class EventController {
 
     @Autowired
