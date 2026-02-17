@@ -83,7 +83,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-        <finalName>kafka-jenkins-demo</finalName>
+        <finalName>kafka-jenkins-demo1</finalName>
 	</build>
 
 </project>

@@ -19,12 +19,11 @@ import java.util.stream.Stream;
 @Slf4j
 public class KafkaMessageConsumer {
 
-    @RetryableTopic(attempts = "4")// 3 topic N-1
-    @KafkaListener(topics = "${app.topic.name}", groupId = "kafka-group")
+    @RetryableTopic(attempts = "4")
+    @KafkaListener(topics = "${app.topic.name}", groupId = "kafka-demo-group")
     public void consumeEvents(User user, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic, @Header(KafkaHeaders.OFFSET) long offset) {
         try {
             log.info("Received: {} from {} offset {}", new ObjectMapper().writeValueAsString(user), topic, offset);
-            //validate restricted IP before process the records
             List<String> restrictedIpList = Stream.of("32.241.244.236", "15.55.49.164", "81.1.95.253", "126.130.43.183").collect(Collectors.toList());
             if (restrictedIpList.contains(user.getIpAddress())) {
                 throw new RuntimeException("Invalid IP Address received !");
